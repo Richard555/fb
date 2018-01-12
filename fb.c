@@ -4,6 +4,30 @@
 #include <linux/fb.h>
 #include <sys/mman.h>
 
+void print_finfo(struct fb_fix_screeninfo *finfo)
+{
+	printf("printing fixed info...\n");
+	printf("id                 = %s\n", finfo->id);
+	printf("physical address   = %lx\n", finfo->smem_start);
+	printf("length             = %x\n", finfo->smem_len);	
+	printf("line_length        = %x\n", finfo->line_length);	
+	printf("mmio_start address = %lx\n", finfo->mmio_start);
+	printf("mmio_length        = %x\n", finfo->mmio_len);	
+
+}
+
+
+void print_vinfo(struct fb_var_screeninfo *vinfo)
+{
+	printf("printing var info...\n", vinfo->xres);
+	printf("visible xres = %d \n", vinfo->xres);
+	printf("visible yres = %d \n", vinfo->yres);
+	printf("virtual xres = %d \n", vinfo->xres_virtual);
+    printf("virtual yres = %d \n", vinfo->yres_virtual);
+	printf("xoffset      = %d \n", vinfo->xoffset);
+	printf("yoffset      = %d \n", vinfo->yoffset);	
+	printf("bits_per_pixel=%d \n", vinfo->bits_per_pixel);
+}
 int main(int argc, char* argv[])
 {
     int fbfd = 0;
@@ -27,12 +51,15 @@ int main(int argc, char* argv[])
         printf("Error reading fixed information.\n");
         return 1;
     }
-
+	print_finfo(&finfo);
+	
     // 取得顯卡的var屬性
     if (ioctl(fbfd, FBIOGET_VSCREENINFO, &vinfo)) {
         printf("Error reading variable information.\n");
         return 1;
     }
+
+	print_vinfo(&vinfo);
 
     printf("%dx%d, %dbpp\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
 
