@@ -1,6 +1,7 @@
-This sample draws a small square in /dev/fb0
+This sample draws a small square with /dev/fb0
 
-Compile it with following command
-gcc -g3 -O0 -o fb fb.c
+Compile it with make  
+The make command "by default" makes generic executable fb (used in ubuntu)
+Use "make arm" to generate arm-based executable fb_arm
 
-run it with root
+remember run it with root privilege level
