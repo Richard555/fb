@@ -1,4 +1,4 @@
-This sample draws a small square in the on screen frame buffer area (with /dev/fb0)
+This sample draws a small pink square on the screen. It works with /dev/fb0.
 
 How to compile:  
 Use make. The make command "by default" makes generic executable fb (used in ubuntu)
